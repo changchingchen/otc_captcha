@@ -13,7 +13,7 @@ BACKGROUD_PIXEL_NUM_TH = 1000
 
 IMAGE_FILE_DIR = "./images/raw_images"
 
-image_filename = "0000.jpg"
+image_filename = "0020.jpg"
 image_file_path = os.path.join(IMAGE_FILE_DIR, image_filename)
 image = cv2.imread(image_file_path, cv2.IMREAD_GRAYSCALE)
 
@@ -49,6 +49,12 @@ char_rects.sort(key=lambda rect: rect[0])
 fig = plt.figure()
 for idx, (x,y,w,h) in enumerate(char_rects):
 	img_tmp = new_image[y:y+h, x:x+w]
+
+	# Clean the border
+	img_tmp[0, :] = GRAYSCALE_MAX_VALUE
+	img_tmp[-1, :] = GRAYSCALE_MAX_VALUE
+	img_tmp[:, 0] = GRAYSCALE_MAX_VALUE
+	img_tmp[:, -1] = GRAYSCALE_MAX_VALUE
 
 	fig.add_subplot(1, len(char_rects), idx+1)
 	plt.imshow(img_tmp)
