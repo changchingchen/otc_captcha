@@ -31,8 +31,8 @@ for color in colors[0]:
 
 # If the character is at the border of the image, it will be found by the cv2.findContours funciton.
 # So, after generating the new image, set the top and bottom border to be backgroud.
-new_image[0] = np.ones(image.shape[1], image.dtype) * GRAYSCALE_MAX_VALUE
-new_image[-1] = np.ones(image.shape[1], image.dtype) * GRAYSCALE_MAX_VALUE
+new_image[0, :] = GRAYSCALE_MAX_VALUE
+new_image[-1, :] = GRAYSCALE_MAX_VALUE
 
 plt.imshow(new_image)
 
